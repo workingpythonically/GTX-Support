@@ -1,4 +1,27 @@
 #!/usr/bin/env python3
+import openpyxl as xl
+
+
+# might have to move the excel extraction here.
+accounts = [["GPS SmartSole", "702365", "Marzian", "029348103250", "mqwet@gmail.com", "werqwte41234", "gb92348"], ["Take-Along", "875046", "Zian", "098a7sdf6803250", "asdf@gail.com", "wasdfasgt4", "ga8648"]]
+var = ["welcome", "refund processing"]
+
+def Xcel(num):
+    accounts = []
+
+    #read only, a little faster to work with.
+    wb = xl.load_workbook(r'C:\Users\courier\Desktop\Automate\GTXCorp.xlsx', read_only = True)
+    print("\nLoading SmartSole Workbook...")
+    sheet = wb["Welcome Email"]
+    num = int(input("\n\nHow many Accounts are we sending out?\n"))
+
+    # Parsing the data into a list in a list
+    for row_cells in sheet.iter_rows(min_col = 2, max_col = 9, min_row = 3, max_row = num+2):
+        accounts.append([cell.value for cell in row_cells])
+
+    # Close Workbook after reading.
+    wb.close()
+    print("Accessing Workbook Complete!\n\nLogging in to SmartSole Email...\n")
 
 def SignatureType(signature):
     if signature == "GPS SmartSole":
@@ -24,39 +47,29 @@ def SignatureType(signature):
         team = "Take-Along Tracker Team"
         webpage = "https://gtxcorp.com/take-along-tracker-3g"
 
-def SubjectType(var, Etype, notice = None):
+def SubjectType(var, Email_Type, OrderID, notice = None):
     if var == "welcome":
-        if accounts[i][0] == "GPS SmartSole":
-            return f"{accounts[i][1]} - Your GPS SmartSole has been shipped!"
-        elif accounts[i][0] == "Take-Along":
-            return f"{accounts[i][1]} - Your Take-Along Tracker has been shipped!"
+        if Email_Type == "GPS SmartSole":
+            return f"{OrderID} - Your GPS SmartSole has been shipped!"
+        elif Email_Type == "Take-Along":
+            return f"{OrderID} - Your Take-Along Tracker has been shipped!"
         else:
-            return f"{accounts[i][1]} - Your GPS Invisabelt has been shipped!"
+            return f"{OrderID} - Your GPS Invisabelt has been shipped!"
 
-    if var == "refund processing"
-        if accounts[i][0] == "GPS SmartSole":
-            return f"{accounts[i][1]} - {accounts[i][0]} Refund Processing!"
-        elif accounts[i][0] == "Invisabelt":
-            return f"{accounts[i][1]} - {accounts[i][0]} Refund Processing!"
+    if var == "refund processing":
+        if E == "GPS SmartSole":
+            return f"{OrderID} - {Email_Type} Refund Processing!"
+        elif  Email_Type == "Invisabelt":
+            return f"{OrderID} - {Email_Type} Refund Processing!"
         else:
-            return f"{accounts[i][1]} - {accounts[i][0]} Refund Processing!"
+            return f"{OrderID} - {Email_Type} Refund Processing!"
 
     if var == "declined":
         if notice == "1st" or notice == "2nd":
-        return f"{OrderIDs[i]} - Payment Declined {notice} notice - {Etype} Subscription"
+            return f"{OrderID} - Payment Declined {notice} notice - {Email_type} Subscription"
     else:
-        return f"{OrderIDs[i]} - Service Suspended - {Etype} Subscription"
+        return f"{OrderID} - Service Suspended - {Email_type} Subscription"
 
-def attach_pdf():
-    if accounts[i][0] == "GPS SmartSole":
-        filename = "SmartSole Manual.pdf"
-    elif accounts[i][0] == "Take-Along":
-        filename = "Take-Along Manual.pdf"
-    else:
-        filename = "Invisabelt Manual.pdf"
 
-    with open(filename, "rb") as f:
-        file = MIMEApplication(f.read(), _subtype="pdf")
-    file.add_header('Content-Disposition','attachment',filename=filename)
-    msg.attach(file)
-    f.close()
+
+

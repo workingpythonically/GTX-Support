@@ -1,0 +1,46 @@
+README Welcome.py
+To make our lives easier sending welcome emails to SmartSole, Take-Along, and Invisablet.
+**ONLY WORKS FOR ORDERS WITH 1 DEVICE. 
+
+**NEEDS
+1. Must have
+	python 3.x
+	sublime text 3 (to edit)
+
+2. Download Libraries
+	got to terminal 
+	For Windows:
+		pip install openpyxl
+	For Linux/Mac:
+		python3 -m pip install openpyxl
+3. Necessary PDFs
+	with the exact name as below. Move the pdfs from the zip file to your folder with python scripts.
+	SmartSole Manual.pdf
+	Take-Along Manual.pdf
+	Invisabelt Manual.pdf
+
+
+Lines to edit
+>129: username, enter your gtx email
+>130: password, enter your gtx email password
+>132: location of the Excel sheet. **You may just add a new sheet on the Excel workbook that you use to send payment notice.
+>134: name of sheet, enter name of the sheet you just created if you just added a new sheet.
+
+**How to execute the script
+1. Edit the sheet, fill in the required informations. Then SAVE the Excel workbook
+2. Go to Terminal
+	For Windows: python Welcome.py
+	For Linux/MAC: python3 Welcome.py or python Welcome.py
+3. DONE! 
+	sending takes a little longer as sending with a pdf file seems to be a bit slower than just regular HTML. But still faster than doing it manually!
+
+
+**HOW TO MINIMIZE ERROR ON WELCOME EMAIL SPREADSHEET**
+1. Copy the template I have, on column B "Types". Go to Data Validation. 
+	Settings, Allow "list". check both "Ignore blank" and "In-cell dropdown"
+	on Source paste: GPS SmartSole,Take-Along,Invisabelt
+	Click OK	
+	*This limits data input error on the Type, where spelling error and capitalization could occurs. And python might not be able to read those inputs.
+
+
+
